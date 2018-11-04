@@ -1,0 +1,11 @@
+<h1> WELCOME TO JH TODO LIST </h1>
+
+{% if todo %}
+    <ul>
+    {% for todo in todolist %} 
+        <li><a href= "{% url 'todo:edit' todo.id %}">{{ todo.todo_title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Add new TODO</p>
+{% endif %}
