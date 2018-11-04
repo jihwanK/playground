@@ -1,11 +1,28 @@
 <h1> WELCOME TO JH TODO LIST </h1>
 
-{% if todo %}
-    <ul>
+{% if todolist %}
+    <table>
+        <tr>
+            <th><b>DONE</b></th>
+            <th><b>TITLE</b></th>
+            <th><b>DEADLINE</b></th>
+        </tr>
     {% for todo in todolist %} 
-        <li><a href= "{% url 'todo:edit' todo.id %}">{{ todo.todo_title }}</a></li>
+    {% if todo.done %}
+        <tr>
+            <td width="130"><div align="center"><input type="checkbox" checked></div></td>
+            <td width="300"><div align="center"><strike>{{ todo.todo_title }}</strike></div></td>
+            <td width="300"><div align="center">{{ todo.deadline }}</div></td>
+        </tr>
+    {% else %}
+        <tr>
+                <td width="130"><div align="center"><input type="checkbox"></div></td>
+                <td width="300"><div align="center"><a href="{% url 'todo:edit' todo.id %}">{{ todo.todo_title }}</a></div></td>
+                <td width="300"><div align="center">{{ todo.deadline }}</div></td>
+        </tr>
+    {% endif %}
     {% endfor %}
-    </ul>
+    </table>
 {% else %}
     <p>Add new TODO</p>
 {% endif %}
